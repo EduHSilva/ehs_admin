@@ -6,11 +6,10 @@ import {
   mdiAlertCircle,
   mdiSquareEditOutline,
   mdiTable,
-  mdiViewList,
   mdiTelevisionGuide,
   mdiResponsive,
   mdiPalette,
-  mdiLogout,
+  mdiLogout, mdiServer,
 } from '@mdi/js'
 
 export const menuAsideMain = [
@@ -60,19 +59,23 @@ export const menuAsideMain = [
     icon: mdiAlertCircle,
   },
   {
-    label: 'Dropdown',
-    icon: mdiViewList,
+    label: 'Infra',
+    icon: mdiServer,
     menu: [
       {
-        label: 'Item One',
+        label: 'Spring Admin',
+        href: 'http://localhost/admin',
+        target: '_blank',
       },
       {
-        label: 'Item Two',
+        label: 'Rabbit MQ',
+        href: 'http://localhost:15672/',
+        target: '_blank',
       },
     ],
   },
   {
-    href: 'https://github.com/justboil/admin-one-vue-tailwind',
+    href: 'https://github.com/EduHSilva',
     label: 'GitHub',
     icon: mdiGithub,
     target: '_blank',
