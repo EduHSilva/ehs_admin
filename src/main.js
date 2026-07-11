@@ -21,14 +21,14 @@ mainStore.fetchSampleClients()
 mainStore.fetchSampleHistory()
 
 // Dark mode
-// Uncomment, if you'd like to restore persisted darkMode setting, or use `prefers-color-scheme: dark`.
-// import { useDarkModeStore } from '@/stores/darkMode'
+// Restore the saved preference, falling back to the system preference on first visit.
+import { useDarkModeStore } from '@/stores/darkMode'
 
-// const darkModeStore = useDarkModeStore(pinia)
-// darkModeStore.init()
+const darkModeStore = useDarkModeStore(pinia)
+darkModeStore.init()
 
 // Default title tag
-const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
+const defaultDocumentTitle = 'EHS Admin'
 
 // Set document title from route meta
 router.afterEach((to) => {

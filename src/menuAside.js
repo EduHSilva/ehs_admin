@@ -2,13 +2,10 @@ import {
   mdiAccountCircle,
   mdiMonitor,
   mdiGithub,
-  mdiLock,
-  mdiAlertCircle,
   mdiSquareEditOutline,
   mdiTable,
   mdiTelevisionGuide,
-  mdiResponsive,
-  mdiPalette,
+  mdiAccountGroupOutline,
   mdiLogout, mdiServer,
 } from '@mdi/js'
 
@@ -17,6 +14,11 @@ export const menuAsideMain = [
     to: '/dashboard',
     icon: mdiMonitor,
     label: 'Dashboard',
+  },
+  {
+    to: '/users',
+    label: 'Usuários',
+    icon: mdiAccountGroupOutline
   },
   {
     to: '/tables',
@@ -34,29 +36,9 @@ export const menuAsideMain = [
     icon: mdiTelevisionGuide,
   },
   {
-    to: '/responsive',
-    label: 'Responsive',
-    icon: mdiResponsive,
-  },
-  {
-    to: '/',
-    label: 'Styles',
-    icon: mdiPalette,
-  },
-  {
     to: '/profile',
     label: 'Profile',
     icon: mdiAccountCircle,
-  },
-  {
-    to: '/login',
-    label: 'Login',
-    icon: mdiLock,
-  },
-  {
-    to: '/error',
-    label: 'Error',
-    icon: mdiAlertCircle,
   },
   {
     label: 'Infra',

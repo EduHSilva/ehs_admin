@@ -1,10 +1,10 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { signIn } from '@/services/auth.js'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
 import SectionFullScreen from '@/components/SectionFullScreen.vue'
 import CardBox from '@/components/CardBox.vue'
-import FormCheckRadio from '@/components/FormCheckRadio.vue'
 import FormField from '@/components/FormField.vue'
 import FormControl from '@/components/FormControl.vue'
 import BaseButton from '@/components/BaseButton.vue'
@@ -12,52 +12,85 @@ import BaseButtons from '@/components/BaseButtons.vue'
 import LayoutGuest from '@/layouts/LayoutGuest.vue'
 
 const form = reactive({
-  login: 'john.doe',
-  pass: 'highly-secure-password-fYjUw-',
-  remember: true,
+  email: '',
+  password: '',
 })
 
 const router = useRouter()
+const errorMessage = ref('')
+const isSubmitting = ref(false)
 
-const submit = () => {
-  router.push('/dashboard')
+const submit = async () => {
+  errorMessage.value = ''
+  isSubmitting.value = true
+
+  try {
+    await signIn(form)
+    await router.replace('/dashboard')
+  } catch (error) {
+    errorMessage.value = error.response?.data?.message || 'Não foi possível entrar. Tente novamente.'
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
 
 <template>
   <LayoutGuest>
-    <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
-      <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormField label="Login" help="Please enter your login">
+    <SectionFullScreen v-slot="{ cardClass }" bg="slateBlue">
+      <CardBox
+        :class="[cardClass, 'border border-slate-200/80 dark:border-slate-700']"
+        is-form
+        @submit.prevent="submit"
+      >
+        <div class="mb-8 text-center">
+          <div
+            class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-lg font-black text-white shadow-lg shadow-blue-600/20"
+          >
+            E
+          </div>
+          <h1 class="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">
+            EHS Admin
+          </h1>
+          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            Acesse o painel de administração
+          </p>
+        </div>
+
+        <p v-if="errorMessage" class="mb-6 rounded border border-red-300 bg-red-50 p-3 text-sm text-red-700">
+          {{ errorMessage }}
+        </p>
+
+        <FormField label="E-mail" help="Use o e-mail cadastrado na plataforma">
           <FormControl
-            v-model="form.login"
+            v-model="form.email"
             :icon="mdiAccount"
-            name="login"
-            autocomplete="username"
+            type="email"
+            name="email"
+            autocomplete="email"
+            required
           />
         </FormField>
 
-        <FormField label="Password" help="Please enter your password">
+        <FormField label="Senha">
           <FormControl
-            v-model="form.pass"
+            v-model="form.password"
             :icon="mdiAsterisk"
             type="password"
             name="password"
             autocomplete="current-password"
+            required
           />
         </FormField>
 
-        <FormCheckRadio
-          v-model="form.remember"
-          name="remember"
-          label="Remember"
-          :input-value="true"
-        />
-
         <template #footer>
           <BaseButtons>
-            <BaseButton type="submit" color="info" label="Login" />
-            <BaseButton to="/dashboard" color="info" outline label="Back" />
+            <BaseButton
+              type="submit"
+              color="info"
+              :label="isSubmitting ? 'Entrando...' : 'Entrar'"
+              :disabled="isSubmitting"
+            />
           </BaseButtons>
         </template>
       </CardBox>

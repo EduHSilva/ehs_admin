@@ -7,22 +7,22 @@
 @utility style-basic {
   &:not(.dark) {
     .aside {
-      @apply bg-gray-800;
+      @apply bg-slate-900;
     }
     .aside-scrollbar {
       @apply scrollbar-styled-basic;
     }
     .aside-brand {
-      @apply bg-gray-900 text-white;
+      @apply bg-slate-950 text-white;
     }
     .aside-menu-item {
-      @apply text-gray-300 hover:text-white;
+      @apply text-slate-300 hover:bg-slate-800 hover:text-white;
     }
     .aside-menu-item-active {
-      @apply text-white;
+      @apply border-l-2 border-blue-400 bg-blue-500/15 text-white;
     }
     .aside-menu-dropdown {
-      @apply bg-gray-700/50;
+      @apply bg-slate-800/60;
     }
     .navbar-item-label {
       @apply text-black hover:text-blue-500;

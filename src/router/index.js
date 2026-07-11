@@ -1,81 +1,55 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Style from '@/views/StyleView.vue'
 import Home from '@/views/HomeView.vue'
+import { isAuthenticated, verifySession } from '@/services/auth.js'
 
 const routes = [
   {
-    meta: {
-      title: 'Select style',
-    },
     path: '/',
-    name: 'style',
-    component: Style,
+    redirect: () => (isAuthenticated() ? '/dashboard' : '/login'),
   },
   {
     // Document title tag
     // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
-    meta: {
-      title: 'Dashboard',
-    },
     path: '/dashboard',
     name: 'dashboard',
     component: Home,
+    meta: { title: 'Dashboard', requiresAuth: true },
   },
   {
-    meta: {
-      title: 'Tables',
-    },
+    meta: { title: 'Usu[arios', requiresAuth: true },
+    path: '/users',
+    name: 'users',
+    component: () => import('@/views/UsersView.vue'),
+  },
+  {
+    meta: { title: 'Tables', requiresAuth: true },
     path: '/tables',
     name: 'tables',
     component: () => import('@/views/TablesView.vue'),
   },
   {
-    meta: {
-      title: 'Forms',
-    },
+    meta: { title: 'Forms', requiresAuth: true },
     path: '/forms',
     name: 'forms',
     component: () => import('@/views/FormsView.vue'),
   },
   {
-    meta: {
-      title: 'Profile',
-    },
+    meta: { title: 'Profile', requiresAuth: true },
     path: '/profile',
     name: 'profile',
     component: () => import('@/views/ProfileView.vue'),
   },
   {
-    meta: {
-      title: 'Ui',
-    },
+    meta: { title: 'Ui', requiresAuth: true },
     path: '/ui',
     name: 'ui',
     component: () => import('@/views/UiView.vue'),
   },
   {
-    meta: {
-      title: 'Responsive layout',
-    },
-    path: '/responsive',
-    name: 'responsive',
-    component: () => import('@/views/ResponsiveView.vue'),
-  },
-  {
-    meta: {
-      title: 'Login',
-    },
     path: '/login',
     name: 'login',
     component: () => import('@/views/LoginView.vue'),
-  },
-  {
-    meta: {
-      title: 'Error',
-    },
-    path: '/error',
-    name: 'error',
-    component: () => import('@/views/ErrorView.vue'),
+    meta: { title: 'Login', guestOnly: true },
   },
 ]
 
@@ -85,6 +59,24 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { top: 0 }
   },
+})
+
+router.beforeEach(async (to) => {
+  if (to.meta.requiresAuth) {
+    const user = await verifySession()
+
+    if (!user) {
+      return { name: 'login' }
+    }
+  }
+
+  if (to.meta.guestOnly && isAuthenticated()) {
+    const user = await verifySession()
+
+    if (user) {
+      return { name: 'dashboard' }
+    }
+  }
 })
 
 export default router

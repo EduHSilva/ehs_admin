@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import { getButtonColor } from '@/colors.js'
 import BaseIcon from '@/components/BaseIcon.vue'
@@ -16,10 +16,12 @@ const props = defineProps({
 
 const emit = defineEmits(['menu-click'])
 
+const route = useRoute()
+
 const hasColor = computed(() => props.item && props.item.color)
 
-const asideMenuItemActiveStyle = computed(() =>
-  hasColor.value ? '' : 'aside-menu-item-active font-bold',
+const isItemActive = computed(
+  () => typeof props.item.to === 'string' && route.path === props.item.to,
 )
 
 const isDropdownActive = ref(false)
@@ -46,35 +48,28 @@ const menuClick = (event) => {
   <li>
     <component
       :is="item.to ? RouterLink : 'a'"
-      v-slot="vSlot"
       :to="item.to ?? null"
       :href="item.href ?? null"
       :target="item.target ?? null"
       class="flex cursor-pointer"
-      :class="componentClass"
+      :class="[
+        componentClass,
+        isItemActive && !hasColor
+          ? 'aside-menu-item-active border-l-2 border-blue-400 bg-blue-500/15 font-semibold text-white'
+          : '',
+      ]"
       @click="menuClick"
     >
-      <BaseIcon
-        v-if="item.icon"
-        :path="item.icon"
-        class="flex-none"
-        :class="[vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '']"
-        w="w-16"
-        :size="18"
-      />
+      <BaseIcon v-if="item.icon" :path="item.icon" class="flex-none" w="w-16" :size="18" />
       <span
         class="line-clamp-1 grow text-ellipsis"
-        :class="[
-          { 'pr-6': !hasDropdown },
-          vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '',
-        ]"
+        :class="{ 'pr-6': !hasDropdown }"
         >{{ item.label }}</span
       >
       <BaseIcon
         v-if="hasDropdown"
         :path="isDropdownActive ? mdiMinus : mdiPlus"
         class="flex-none"
-        :class="[vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '']"
         w="w-12"
       />
     </component>
