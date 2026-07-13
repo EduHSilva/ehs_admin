@@ -1,7 +1,7 @@
 <script setup>
-import { getButtonColor } from '@/colors.js';
-import BaseIcon from '@/components/BaseIcon.vue';
-import { useDarkModeStore } from '@/stores/darkMode';
+import { getButtonColor } from '../colors.js';
+import BaseIcon from '../components/BaseIcon.vue';
+import { useDarkModeStore } from '../stores/darkMode';
 import { Link } from '@inertiajs/vue3';
 import { computed } from 'vue';
 

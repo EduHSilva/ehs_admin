@@ -1,5 +1,5 @@
 <script setup>
-import UserAvatar from '@/components/UserAvatar.vue';
+import UserAvatar from '../components/UserAvatar.vue';
 import { usePage } from '@inertiajs/vue3';
 
 const page = usePage();

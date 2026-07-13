@@ -1,6 +1,6 @@
 import '../css/main.css';
 
-import { useDarkModeStore } from '@/stores/darkMode';
+import { useDarkModeStore } from '../stores/darkMode';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createPinia } from 'pinia';

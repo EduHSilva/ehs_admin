@@ -1,9 +1,9 @@
 <script setup>
 import { computed } from 'vue'
-import { RouterLink } from 'vue-router'
-import { getButtonColor } from '@/colors.js'
-import BaseIcon from '@/components/BaseIcon.vue'
-import { useDarkModeStore } from '@/stores/darkMode'
+import { NuxtLink } from '#components'
+import { getButtonColor } from '../colors'
+import BaseIcon from '../components/BaseIcon.vue'
+import { useDarkModeStore } from '../stores/darkMode'
 
 const props = defineProps({
   label: [String, Number],
@@ -31,7 +31,7 @@ const is = computed(() => {
   }
 
   if (props.to) {
-    return RouterLink
+    return NuxtLink
   }
 
   if (props.href) {

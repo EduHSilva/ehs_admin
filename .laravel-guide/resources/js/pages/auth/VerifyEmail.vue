@@ -1,15 +1,15 @@
 <script setup>
-import BaseButton from '@/components/BaseButton.vue';
-import BaseDivider from '@/components/BaseDivider.vue';
-import BaseLevel from '@/components/BaseLevel.vue';
-import CardBox from '@/components/CardBox.vue';
-import FormField from '@/components/FormField.vue';
-import FormValidationErrors from '@/components/FormValidationErrors.vue';
-import NotificationBarInCard from '@/components/NotificationBarInCard.vue';
-import SectionFullScreen from '@/components/SectionFullScreen.vue';
-import LayoutGuest from '@/layouts/LayoutGuest.vue';
-import { logout } from '@/routes';
-import verification from '@/routes/verification';
+import BaseButton from '../components/BaseButton.vue';
+import BaseDivider from '../components/BaseDivider.vue';
+import BaseLevel from '../components/BaseLevel.vue';
+import CardBox from '../components/CardBox.vue';
+import FormField from '../components/FormField.vue';
+import FormValidationErrors from '../components/FormValidationErrors.vue';
+import NotificationBarInCard from '../components/NotificationBarInCard.vue';
+import SectionFullScreen from '../components/SectionFullScreen.vue';
+import LayoutGuest from '../layouts/LayoutGuest.vue';
+import { logout } from '../routes';
+import verification from '../routes/verification';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { computed } from 'vue';
 

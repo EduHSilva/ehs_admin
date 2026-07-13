@@ -1,13 +1,13 @@
 <script setup>
-import AsideMenu from '@/components/AsideMenu.vue';
-import BaseIcon from '@/components/BaseIcon.vue';
-import FooterBar from '@/components/FooterBar.vue';
-import FormControl from '@/components/FormControl.vue';
-import NavBar from '@/components/NavBar.vue';
-import NavBarItemPlain from '@/components/NavBarItemPlain.vue';
-import menuAside from '@/menuAside.js';
-import menuNavBar from '@/menuNavBar.js';
-import { useDarkModeStore } from '@/stores/darkMode.js';
+import AsideMenu from '../components/AsideMenu.vue';
+import BaseIcon from '../components/BaseIcon.vue';
+import FooterBar from '../components/FooterBar.vue';
+import FormControl from '../components/FormControl.vue';
+import NavBar from '../components/NavBar.vue';
+import NavBarItemPlain from '../components/NavBarItemPlain.vue';
+import menuAside from '../menuAside.js';
+import menuNavBar from '../menuNavBar.js';
+import { useDarkModeStore } from '../stores/darkMode.js';
 import { router } from '@inertiajs/vue3';
 import { mdiBackburger, mdiForwardburger, mdiMenu } from '@mdi/js';
 import { ref } from 'vue';

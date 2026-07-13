@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import BaseButton from '@/components/BaseButton.vue';
-import BaseButtons from '@/components/BaseButtons.vue';
-import CardBoxComponentFooter from '@/components/CardBoxComponentFooter.vue';
-import CardBoxMessage from '@/components/CardBoxMessage.vue';
-import CardBoxModal from '@/components/CardBoxModal.vue';
-import CardBoxModalBody from '@/components/CardBoxModalBody.vue';
-import FormControl from '@/components/FormControl.vue';
-import FormField from '@/components/FormField.vue';
-import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
-import { confirm } from '@/routes/two-factor';
+import BaseButton from '../components/BaseButton.vue';
+import BaseButtons from '../components/BaseButtons.vue';
+import CardBoxComponentFooter from '../components/CardBoxComponentFooter.vue';
+import CardBoxMessage from '../components/CardBoxMessage.vue';
+import CardBoxModal from '../components/CardBoxModal.vue';
+import CardBoxModalBody from '../components/CardBoxModalBody.vue';
+import FormControl from '../components/FormControl.vue';
+import FormField from '../components/FormField.vue';
+import { useTwoFactorAuth } from '../composables/useTwoFactorAuth';
+import { confirm } from '../routes/two-factor';
 import { Form } from '@inertiajs/vue3';
 import { useClipboard } from '@vueuse/core';
 import { Check, Copy, Loader2 } from 'lucide-vue-next';

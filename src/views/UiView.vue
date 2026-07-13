@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
-import { useDarkModeStore } from '@/stores/darkMode.js'
+import { useDarkModeStore } from '../stores/darkMode'
 import {
   mdiContrastCircle,
   mdiInformation,
@@ -12,21 +12,21 @@ import {
   mdiReload,
   mdiTrendingUp,
 } from '@mdi/js'
-import SectionMain from '@/components/SectionMain.vue'
-import CardBox from '@/components/CardBox.vue'
-import BaseButtons from '@/components/BaseButtons.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import NotificationBar from '@/components/NotificationBar.vue'
-import BaseDivider from '@/components/BaseDivider.vue'
-import CardBoxModal from '@/components/CardBoxModal.vue'
-import SectionTitle from '@/components/SectionTitle.vue'
-import FormField from '@/components/FormField.vue'
-import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue'
-import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
-import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue'
-import CardBoxComponentEmpty from '@/components/CardBoxComponentEmpty.vue'
-import CardBoxComponentTitle from '@/components/CardBoxComponentTitle.vue'
-import PillTag from '@/components/PillTag.vue'
+import SectionMain from '../components/SectionMain.vue'
+import CardBox from '../components/CardBox.vue'
+import BaseButtons from '../components/BaseButtons.vue'
+import BaseButton from '../components/BaseButton.vue'
+import NotificationBar from '../components/NotificationBar.vue'
+import BaseDivider from '../components/BaseDivider.vue'
+import CardBoxModal from '../components/CardBoxModal.vue'
+import SectionTitle from '../components/SectionTitle.vue'
+import FormField from '../components/FormField.vue'
+import FormCheckRadioGroup from '../components/FormCheckRadioGroup.vue'
+import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue'
+import SectionTitleLineWithButton from '../components/SectionTitleLineWithButton.vue'
+import CardBoxComponentEmpty from '../components/CardBoxComponentEmpty.vue'
+import CardBoxComponentTitle from '../components/CardBoxComponentTitle.vue'
+import PillTag from '../components/PillTag.vue'
 
 const modalOneActive = ref(false)
 

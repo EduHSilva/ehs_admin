@@ -3,15 +3,32 @@ import axios from 'axios'
 const TOKEN_STORAGE_KEY = 'ehs-admin-token'
 const USER_STORAGE_KEY = 'ehs-admin-user'
 
+type AuthUser = {
+  token?: string
+  id?: string | number
+  username?: string
+  [key: string]: unknown
+}
+
+type SignInPayload = {
+  email: string
+  password: string
+}
+
 const authApi = axios.create({
-  baseURL: import.meta.env.VITE_USERS_API_URL || 'http://localhost/users',
+  baseURL:
+    import.meta.env.NUXT_PUBLIC_USERS_API_URL ||
+    import.meta.env.VITE_USERS_API_URL ||
+    'http://localhost/users',
 })
 
 export function getToken() {
+  if (typeof localStorage === 'undefined') return null
   return localStorage.getItem(TOKEN_STORAGE_KEY)
 }
 
 export function getUser() {
+  if (typeof localStorage === 'undefined') return null
   const user = localStorage.getItem(USER_STORAGE_KEY)
 
   if (!user) {
@@ -19,7 +36,7 @@ export function getUser() {
   }
 
   try {
-    return JSON.parse(user)
+    return JSON.parse(user) as AuthUser
   } catch {
     signOut()
     return null
@@ -30,19 +47,19 @@ export function isAuthenticated() {
   return Boolean(getToken())
 }
 
-function saveSession(user) {
+function saveSession(user: AuthUser) {
   if (!user?.token) {
-    throw new Error('A resposta de autenticação não retornou um token.')
+    throw new Error('A resposta de autenticacao nao retornou um token.')
   }
 
   localStorage.setItem(TOKEN_STORAGE_KEY, user.token)
   localStorage.setItem(USER_STORAGE_KEY, JSON.stringify({ ...user, token: undefined }))
 }
 
-export async function signIn({ email, password }) {
+export async function signIn({ email, password }: SignInPayload) {
   try {
     const response = await authApi.post('/auth/login', { email, password })
-    const user = response.data?.data
+    const user = response.data?.data as AuthUser
 
     saveSession(user)
     return user
@@ -63,10 +80,10 @@ export async function verifySession() {
     const response = await authApi.get('/auth/me', {
       headers: { Authorization: `Bearer ${token}` },
     })
-    const user = response.data?.data
+    const user = response.data?.data as AuthUser
 
     if (!user?.id) {
-      throw new Error('A sessão retornou dados de usuário inválidos.')
+      throw new Error('A sessao retornou dados de usuario invalidos.')
     }
 
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user))
@@ -78,6 +95,7 @@ export async function verifySession() {
 }
 
 export function signOut() {
+  if (typeof localStorage === 'undefined') return
   localStorage.removeItem(TOKEN_STORAGE_KEY)
   localStorage.removeItem(USER_STORAGE_KEY)
 }

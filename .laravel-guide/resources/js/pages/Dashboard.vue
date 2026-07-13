@@ -1,18 +1,17 @@
 <script setup>
-import BaseButton from '@/components/BaseButton.vue';
-import CardBox from '@/components/CardBox.vue';
-import CardBoxClient from '@/components/CardBoxClient.vue';
-import CardBoxTransaction from '@/components/CardBoxTransaction.vue';
-import CardBoxWidget from '@/components/CardBoxWidget.vue';
-import * as chartConfig from '@/components/Charts/chart.config.js';
-import LineChart from '@/components/Charts/LineChart.vue';
-import NotificationBar from '@/components/NotificationBar.vue';
-import SectionBannerStarOnGitHub from '@/components/SectionBannerStarOnGitHub.vue';
-import SectionMain from '@/components/SectionMain.vue';
-import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue';
-import TableSampleClients from '@/components/TableSampleClients.vue';
-import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue';
-import { useMainStore } from '@/stores/main';
+import BaseButton from '../components/BaseButton.vue';
+import CardBox from '../components/CardBox.vue';
+import CardBoxClient from '../components/CardBoxClient.vue';
+import CardBoxTransaction from '../components/CardBoxTransaction.vue';
+import CardBoxWidget from '../components/CardBoxWidget.vue';
+import * as chartConfig from '../components/Charts/chart.config.js';
+import LineChart from '../components/Charts/LineChart.vue';
+import NotificationBar from '../components/NotificationBar.vue';
+import SectionBannerStarOnGitHub from '../components/SectionBannerStarOnGitHub.vue';
+import SectionMain from '../components/SectionMain.vue';
+import SectionTitleLineWithButton from '../components/SectionTitleLineWithButton.vue';
+import TableSampleClients from '../components/TableSampleClients.vue';
+import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
 import {
   mdiAccountMultiple,
   mdiCartOutline,
@@ -34,11 +33,10 @@ onMounted(() => {
   fillChartData();
 });
 
-const mainStore = useMainStore();
 
-const clientBarItems = computed(() => mainStore.clients.slice(0, 4));
+const clientBarItems = computed(() => []);
 
-const transactionBarItems = computed(() => mainStore.history);
+const transactionBarItems = computed(() =>[]);
 </script>
 
 <template>

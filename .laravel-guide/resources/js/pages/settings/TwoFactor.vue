@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import BaseButton from '@/components/BaseButton.vue';
-import CardBox from '@/components/CardBox.vue';
-import CardBoxMessage from '@/components/CardBoxMessage.vue';
-import PillTag from '@/components/PillTag.vue';
-import SectionMain from '@/components/SectionMain.vue';
-import SectionTitleLineWithButton from '@/components/SectionTitleLineWithButton.vue';
-import TwoFactorRecoveryCodes from '@/components/TwoFactorRecoveryCodes.vue';
-import TwoFactorSetupModal from '@/components/TwoFactorSetupModal.vue';
-import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
-import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue';
-import profile from '@/routes/profile';
-import { disable, enable } from '@/routes/two-factor';
+import BaseButton from '../components/BaseButton.vue';
+import CardBox from '../components/CardBox.vue';
+import CardBoxMessage from '../components/CardBoxMessage.vue';
+import PillTag from '../components/PillTag.vue';
+import SectionMain from '../components/SectionMain.vue';
+import SectionTitleLineWithButton from '../components/SectionTitleLineWithButton.vue';
+import TwoFactorRecoveryCodes from '../components/TwoFactorRecoveryCodes.vue';
+import TwoFactorSetupModal from '../components/TwoFactorSetupModal.vue';
+import { useTwoFactorAuth } from '../composables/useTwoFactorAuth';
+import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue';
+import profile from '../routes/profile';
+import { disable, enable } from '../routes/two-factor';
 import { Form } from '@inertiajs/vue3';
 import { mdiAccount, mdiTwoFactorAuthentication } from '@mdi/js';
 import { onUnmounted, ref } from 'vue';

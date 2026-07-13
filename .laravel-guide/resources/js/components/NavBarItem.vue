@@ -1,9 +1,9 @@
 <script setup>
-import BaseDivider from '@/components/BaseDivider.vue';
-import BaseIcon from '@/components/BaseIcon.vue';
-import NavBarMenuList from '@/components/NavBarMenuList.vue';
-import UserAvatarCurrentUser from '@/components/UserAvatarCurrentUser.vue';
-import { useDarkModeStore } from '@/stores/darkMode';
+import BaseDivider from '../components/BaseDivider.vue';
+import BaseIcon from '../components/BaseIcon.vue';
+import NavBarMenuList from '../components/NavBarMenuList.vue';
+import UserAvatarCurrentUser from '../components/UserAvatarCurrentUser.vue';
+import { useDarkModeStore } from '../stores/darkMode';
 import { Link, usePage } from '@inertiajs/vue3';
 import { mdiChevronDown, mdiChevronUp } from '@mdi/js';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';

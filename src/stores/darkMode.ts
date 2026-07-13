@@ -23,7 +23,7 @@ export const useDarkModeStore = defineStore('darkMode', () => {
     init()
   }
 
-  function set(payload = null, persist = false) {
+  function set(payload: boolean | null = null, persist = false) {
     const setIsEnabled = payload !== null ? payload : !isEnabled.value
 
     if (isEnabled.value !== setIsEnabled) {

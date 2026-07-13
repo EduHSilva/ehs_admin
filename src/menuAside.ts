@@ -6,7 +6,7 @@ import {
   mdiTable,
   mdiTelevisionGuide,
   mdiAccountGroupOutline,
-  mdiLogout, mdiServer,
+  mdiLogout, mdiServer, mdiSitemap, mdiIntegratedCircuitChip,
 } from '@mdi/js'
 
 export const menuAsideMain = [
@@ -16,8 +16,8 @@ export const menuAsideMain = [
     label: 'Dashboard',
   },
   {
-    to: '/users',
-    label: 'Usuários',
+    to: '/clientes',
+    label: 'Clientes',
     icon: mdiAccountGroupOutline
   },
   {
@@ -39,6 +39,38 @@ export const menuAsideMain = [
     to: '/profile',
     label: 'Profile',
     icon: mdiAccountCircle,
+  },
+  {
+    label: 'Sites',
+    icon: mdiSitemap,
+    menu: [
+      {
+        label: 'Finances',
+        href: 'http://localhost:3000',
+        target: '_blank',
+      },
+      {
+        label: 'Fitness',
+        href: 'http://localhost:3001',
+        target: '_blank',
+      },
+    ],
+  },
+  {
+    label: 'Integrações',
+    icon: mdiIntegratedCircuitChip,
+    menu: [
+      {
+        label: 'Spring Admin',
+        href: 'http://localhost/admin',
+        target: '_blank',
+      },
+      {
+        label: 'Rabbit MQ',
+        href: 'http://localhost:15672/',
+        target: '_blank',
+      },
+    ],
   },
   {
     label: 'Infra',

@@ -1,5 +1,5 @@
 <script setup>
-import NotificationBar from '@/components/NotificationBar.vue';
+import NotificationBar from '../components/NotificationBar.vue';
 import { computed } from 'vue';
 
 const props = defineProps({

@@ -34,8 +34,37 @@ export const colorsOutline = {
   info: [colorsText.info, 'border-blue-500'],
 }
 
-export const getButtonColor = (color, isOutlined, hasHover, isActive = false) => {
-  const colors = {
+type ButtonColor = 'white' | 'whiteDark' | 'lightDark' | 'contrast' | 'success' | 'danger' | 'warning' | 'info'
+
+const buttonColorKeys: Record<ButtonColor, true> = {
+  white: true,
+  whiteDark: true,
+  lightDark: true,
+  contrast: true,
+  success: true,
+  danger: true,
+  warning: true,
+  info: true,
+}
+
+const isButtonColor = (value: string): value is ButtonColor =>
+  Object.prototype.hasOwnProperty.call(buttonColorKeys, value)
+
+export const getButtonColor = (
+  color: ButtonColor | string,
+  isOutlined: boolean,
+  hasHover: boolean,
+  isActive = false,
+): string | string[] => {
+  const colors: {
+    ring: Record<ButtonColor, string>
+    active: Record<ButtonColor, string>
+    bg: Record<ButtonColor, string>
+    bgHover: Record<ButtonColor, string>
+    borders: Record<ButtonColor, string>
+    text: Record<ButtonColor, string>
+    outlineHover: Record<ButtonColor, string>
+  } = {
     ring: {
       white: 'ring-gray-200 dark:ring-gray-500',
       whiteDark: 'ring-gray-200 dark:ring-gray-500',
@@ -90,6 +119,9 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
       info: 'border-blue-600 dark:border-blue-500',
     },
     text: {
+      white: 'text-black dark:text-slate-100',
+      whiteDark: 'text-black dark:text-slate-100',
+      lightDark: 'text-gray-700 dark:text-slate-400',
       contrast: 'dark:text-slate-100',
       success: 'text-emerald-600 dark:text-emerald-500',
       danger: 'text-red-600 dark:text-red-500',
@@ -97,6 +129,9 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
       info: 'text-blue-600 dark:text-blue-500',
     },
     outlineHover: {
+      white: 'hover:bg-gray-100',
+      whiteDark: 'hover:bg-gray-100 dark:hover:bg-slate-800',
+      lightDark: 'hover:bg-gray-200 dark:hover:bg-slate-700',
       contrast:
         'hover:bg-gray-800 hover:text-gray-100 dark:hover:bg-slate-100 dark:hover:text-black',
       success:
@@ -109,22 +144,22 @@ export const getButtonColor = (color, isOutlined, hasHover, isActive = false) =>
     },
   }
 
-  if (!colors.bg[color]) {
+  if (!isButtonColor(color)) {
     return color
   }
 
+  const themeColor = color
   const isOutlinedProcessed = isOutlined && ['white', 'whiteDark', 'lightDark'].indexOf(color) < 0
-
-  const base = [colors.borders[color], colors.ring[color]]
+  const base: string[] = [colors.borders[themeColor], colors.ring[themeColor]]
 
   if (isActive) {
-    base.push(colors.active[color])
+    base.push(colors.active[themeColor])
   } else {
-    base.push(isOutlinedProcessed ? colors.text[color] : colors.bg[color])
+    base.push(isOutlinedProcessed ? colors.text[themeColor] : colors.bg[themeColor])
   }
 
   if (hasHover) {
-    base.push(isOutlinedProcessed ? colors.outlineHover[color] : colors.bgHover[color])
+    base.push(isOutlinedProcessed ? colors.outlineHover[themeColor] : colors.bgHover[themeColor])
   }
 
   return base

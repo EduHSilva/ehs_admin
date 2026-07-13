@@ -1,19 +1,19 @@
 <script setup>
-import BaseButton from '@/components/BaseButton.vue';
-import BaseButtons from '@/components/BaseButtons.vue';
-import BaseDivider from '@/components/BaseDivider.vue';
-import BaseLevel from '@/components/BaseLevel.vue';
-import CardBox from '@/components/CardBox.vue';
-import FormCheckRadioGroup from '@/components/FormCheckRadioGroup.vue';
-import FormControl from '@/components/FormControl.vue';
-import FormField from '@/components/FormField.vue';
-import FormValidationErrors from '@/components/FormValidationErrors.vue';
-import NotificationBarInCard from '@/components/NotificationBarInCard.vue';
-import SectionFullScreen from '@/components/SectionFullScreen.vue';
-import LayoutGuest from '@/layouts/LayoutGuest.vue';
-import { register } from '@/routes';
-import login from '@/routes/login';
-import password from '@/routes/password';
+import BaseButton from '../components/BaseButton.vue';
+import BaseButtons from '../components/BaseButtons.vue';
+import BaseDivider from '../components/BaseDivider.vue';
+import BaseLevel from '../components/BaseLevel.vue';
+import CardBox from '../components/CardBox.vue';
+import FormCheckRadioGroup from '../components/FormCheckRadioGroup.vue';
+import FormControl from '../components/FormControl.vue';
+import FormField from '../components/FormField.vue';
+import FormValidationErrors from '../components/FormValidationErrors.vue';
+import NotificationBarInCard from '../components/NotificationBarInCard.vue';
+import SectionFullScreen from '../components/SectionFullScreen.vue';
+import LayoutGuest from '../layouts/LayoutGuest.vue';
+import { register } from '../routes';
+import login from '../routes/login';
+import password from '../routes/password';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { mdiAccount, mdiAsterisk } from '@mdi/js';
 

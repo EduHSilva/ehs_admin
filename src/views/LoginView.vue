@@ -1,15 +1,14 @@
 <script setup>
 import { reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { signIn } from '@/services/auth.js'
+import { signIn } from '../services/auth'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
-import SectionFullScreen from '@/components/SectionFullScreen.vue'
-import CardBox from '@/components/CardBox.vue'
-import FormField from '@/components/FormField.vue'
-import FormControl from '@/components/FormControl.vue'
-import BaseButton from '@/components/BaseButton.vue'
-import BaseButtons from '@/components/BaseButtons.vue'
-import LayoutGuest from '@/layouts/LayoutGuest.vue'
+import SectionFullScreen from '../components/SectionFullScreen.vue'
+import CardBox from '../components/CardBox.vue'
+import FormField from '../components/FormField.vue'
+import FormControl from '../components/FormControl.vue'
+import BaseButton from '../components/BaseButton.vue'
+import BaseButtons from '../components/BaseButtons.vue'
+import LayoutGuest from '../layouts/LayoutGuest.vue'
 
 const form = reactive({
   email: '',

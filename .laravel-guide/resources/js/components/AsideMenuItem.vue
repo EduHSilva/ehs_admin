@@ -1,7 +1,7 @@
 <script setup>
-import { getButtonColor } from '@/colors.js';
-import AsideMenuList from '@/components/AsideMenuList.vue';
-import BaseIcon from '@/components/BaseIcon.vue';
+import { getButtonColor } from '../colors.js';
+import AsideMenuList from '../components/AsideMenuList.vue';
+import BaseIcon from '../components/BaseIcon.vue';
 import { Link, usePage } from '@inertiajs/vue3';
 import { mdiMinus, mdiPlus } from '@mdi/js';
 import { computed, ref } from 'vue';

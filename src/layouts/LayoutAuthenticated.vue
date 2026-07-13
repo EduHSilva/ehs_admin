@@ -1,16 +1,15 @@
 <script setup>
 import { mdiForwardburger, mdiBackburger, mdiMenu } from '@mdi/js'
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { menuAsideMain, menuAsideBottom } from '@/menuAside.js'
-import menuNavBar from '@/menuNavBar.js'
-import { useDarkModeStore } from '@/stores/darkMode.js'
-import { signOut } from '@/services/auth.js'
-import BaseIcon from '@/components/BaseIcon.vue'
-import FormControl from '@/components/FormControl.vue'
-import NavBar from '@/components/NavBar.vue'
-import NavBarItemPlain from '@/components/NavBarItemPlain.vue'
-import AsideMenu from '@/components/AsideMenu.vue'
+import { ref, watch } from 'vue'
+import { menuAsideMain, menuAsideBottom } from '../menuAside'
+import menuNavBar from '../menuNavBar'
+import { useDarkModeStore } from '../stores/darkMode'
+import { signOut } from '../services/auth'
+import BaseIcon from '../components/BaseIcon.vue'
+import FormControl from '../components/FormControl.vue'
+import NavBar from '../components/NavBar.vue'
+import NavBarItemPlain from '../components/NavBarItemPlain.vue'
+import AsideMenu from '../components/AsideMenu.vue'
 
 const layoutAsidePadding = 'lg:pl-60'
 
@@ -21,7 +20,7 @@ const router = useRouter()
 const isAsideMobileExpanded = ref(false)
 const isAsideLgActive = ref(true)
 
-router.beforeEach(() => {
+watch(() => router.currentRoute.value.fullPath, () => {
   isAsideMobileExpanded.value = false
 })
 

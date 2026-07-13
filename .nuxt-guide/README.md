@@ -59,7 +59,7 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  css: ['@/assets/css/main.css']
+  css: ['../assets/css/main.css']
 })
 ```
 
@@ -85,8 +85,8 @@ module.exports = {
 
 ```vue
 <script setup>
-// import { useDarkModeStore } from '@/stores/darkMode.js'
-// import { darkModeKey } from '@/config.js'
+// import { useDarkModeStore } from '../stores/darkMode.js'
+// import { darkModeKey } from '../config.js'
 
 useHead({
   titleTemplate: (titleChunk) => {
@@ -244,7 +244,7 @@ Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<N
 
 ```vue
 <script setup>
-// import LayoutGuest from '@/layouts/LayoutGuest.vue'
+// import LayoutGuest from '../layouts/LayoutGuest.vue'
 // ...
 </script>
 
@@ -265,7 +265,7 @@ Then, wrap the entire template with `<div>` and replace `<LayoutGuest>` with `<N
 
 ```vue
 <script setup>
-// import LayoutAuthenticated from '@/layouts/LayoutAuthenticated.vue'
+// import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue'
 // ...
 </script>
 

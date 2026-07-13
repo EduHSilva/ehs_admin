@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useTwoFactorAuth } from '@/composables/useTwoFactorAuth';
-import { regenerateRecoveryCodes } from '@/routes/two-factor';
+import { useTwoFactorAuth } from '../composables/useTwoFactorAuth';
+import { regenerateRecoveryCodes } from '../routes/two-factor';
 import { Form } from '@inertiajs/vue3';
 import { mdiEyeOffOutline, mdiEyeOutline, mdiLockOutline, mdiReload } from '@mdi/js';
 import { nextTick, onMounted, ref } from 'vue';

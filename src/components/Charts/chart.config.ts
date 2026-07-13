@@ -4,10 +4,12 @@ export const chartColors = {
     info: '#209CEE',
     danger: '#FF3860',
   },
-}
+} as const
 
-const randomChartData = (n) => {
-  const data = []
+type ChartColor = keyof typeof chartColors.default
+
+const randomChartData = (n: number): number[] => {
+  const data: number[] = []
 
   for (let i = 0; i < n; i++) {
     data.push(Math.round(Math.random() * 200))
@@ -16,7 +18,7 @@ const randomChartData = (n) => {
   return data
 }
 
-const datasetObject = (color, points) => {
+const datasetObject = (color: ChartColor, points: number) => {
   return {
     fill: false,
     borderColor: chartColors.default[color],
@@ -37,7 +39,7 @@ const datasetObject = (color, points) => {
 }
 
 export const sampleChartData = (points = 9) => {
-  const labels = []
+  const labels: string[] = []
 
   for (let i = 1; i <= points; i++) {
     labels.push(`0${i}`)
