@@ -1,7 +1,6 @@
 <script setup>
 import { mdiChevronUp, mdiChevronDown } from '@mdi/js'
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
-import { NuxtLink } from '#components'
 import BaseIcon from '../components/BaseIcon.vue'
 import UserAvatarCurrentUser from '../components/UserAvatarCurrentUser.vue'
 import NavBarMenuList from '../components/NavBarMenuList.vue'
@@ -45,9 +44,7 @@ const componentClass = computed(() => {
   return base
 })
 
-const itemLabel = computed(() =>
-  props.item.isCurrentUser ? getUser().username : props.item.label,
-)
+const itemLabel = computed(() => (props.item.isCurrentUser ? getUser().username : props.item.label))
 
 const isDropdownActive = ref(false)
 

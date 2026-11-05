@@ -1,0 +1,18 @@
+﻿# Produção: usa a imagem publicada no GitHub Container Registry.
+# A stack dos microservices deve estar ativa e sua rede externa existir.
+services:
+  admin-ui:
+    image: ${ADMIN_UI_IMAGE:-ghcr.io/eduhsilva/admin-ui:${IMAGE_TAG:-latest}}
+    container_name: admin-ui
+    restart: unless-stopped
+    expose:
+      - "80"
+    networks:
+      default: {}
+      microservices:
+        aliases:
+          - admin-ui
+networks:
+  microservices:
+    external: true
+    name: ${EHS_MICROSERVICES_NETWORK:-microservices_backend}

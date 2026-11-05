@@ -14,17 +14,13 @@ export const clientsStore = defineStore('clientsStore', () => {
 
   const usersApi = () =>
     axios.create({
-      baseURL:
-        import.meta.env.NUXT_PUBLIC_USERS_API_URL ||
-        import.meta.env.VITE_USERS_API_URL ||
-        'http://localhost/users',
+      baseURL: useRuntimeConfig().public.usersApiUrl,
       headers: { Authorization: `Bearer ${getToken()}` },
     })
 
   async function fetchUsers() {
     try {
-      const result = await usersApi()
-        .get('/')
+      const result = await usersApi().get('/')
       users.value = (result?.data?.data?.items ?? []) as RecordItem[]
     } catch (error: any) {
       alert(error.message)

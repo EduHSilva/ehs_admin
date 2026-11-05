@@ -1,33 +1,79 @@
-# This is a basic workflow to help you get started with Actions
-name: Build
+name: Build and Publish
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
-  push:
-    branches: [ master ]
-
-    # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ["v*"]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+permissions:
+  contents: read
+  packages: write
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: ghcr.io/eduhsilva
+  IMAGE_NAME: admin-ui
+
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  # --------------------------------------------------
+  # VERIFICAÇÃO
+  # --------------------------------------------------
+  verify:
+    name: Verify app
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+  # --------------------------------------------------
+  # BUILD E PUSH - GHCR
+  # --------------------------------------------------
+  build-and-push:
+    name: Build and push image
+    needs: verify
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'dist' folder
-        run: |
-          npm install
-          npm run build
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+      - uses: actions/checkout@v4
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login GHCR
+        uses: docker/login-action@v3
         with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: dist # The folder the action should deploy.
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and Push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          build-args: |
+            NUXT_APP_BASE_URL=/app/admin/
+            NUXT_PUBLIC_USERS_API_URL=/users
+          tags: |
+            ${{ env.IMAGE_PREFIX }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.IMAGE_PREFIX }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max

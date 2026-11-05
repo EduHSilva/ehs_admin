@@ -1,4 +1,35 @@
-# [Admin One &mdash; Free Vue 3.x Tailwind 4.x Admin Dashboard with dark mode](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
+﻿# [Admin One &mdash; Free Vue 3.x Tailwind 4.x Admin Dashboard with dark mode](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
+
+## Estrutura
+
+- `web/` â€” aplicaÃ§Ã£o Nuxt (todo o cÃ³digo web, `package.json`, config e assets).
+- `Dockerfile`, `docker-compose.yaml` e `docker/` â€” build e publicaÃ§Ã£o em `/app/admin/`.
+- `.github/` â€” CI e publicaÃ§Ã£o da imagem `admin-ui`.
+
+Comandos de desenvolvimento, a partir de `web/`:
+
+```bash
+npm install
+npm run dev     # http://localhost:3000/app/admin/
+npm run build   # typecheck + build de produÃ§Ã£o
+```
+
+## Docker / Deploy
+
+Este painel roda em um container nginx prÃ³prio e Ã© publicado pelo nginx dos
+microservices em **`/app/admin/`**:
+
+```bash
+docker compose up -d --build
+# http://localhost/app/admin/
+```
+
+- O compose local usa a rede externa `ehs_microservices_default` e publica a porta 3000 para depuraÃ§Ã£o.
+- A API Ã© consumida na mesma origem (`NUXT_PUBLIC_USERS_API_URL=/users`), pelo gateway dos microservices.
+- A imagem publicada pelo GitHub Actions Ã© `ghcr.io/eduhsilva/admin-ui` (tags `latest` e `<sha>`), gerada por `.github/workflows/build.yml`.
+- Em produÃ§Ã£o, use `docker-compose.prod.yml`. Ele nÃ£o publica portas no host e usa por padrÃ£o a rede `microservices_backend`:
+  `docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d`.
+- Para fixar uma versÃ£o, defina `IMAGE_TAG=<sha>`. Se a rede tiver outro nome, defina `EHS_MICROSERVICES_NETWORK`; `ADMIN_UI_IMAGE` substitui a imagem completa.
 
 [![version](https://img.shields.io/github/v/release/justboil/admin-one-vue-tailwind)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)  [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://justboil.me/tailwind-admin-templates/free-vue-dashboard/)
 
@@ -179,3 +210,4 @@ The issue list is reserved exclusively for bug reports and feature requests. Tha
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Vue.js 3](https://v3.vuejs.org/)
 - [Vite](https://vitejs.dev)
+

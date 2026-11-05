@@ -15,12 +15,11 @@ type SignInPayload = {
   password: string
 }
 
-const authApi = axios.create({
-  baseURL:
-    import.meta.env.NUXT_PUBLIC_USERS_API_URL ||
-    import.meta.env.VITE_USERS_API_URL ||
-    'http://localhost/users',
-})
+function authApi() {
+  return axios.create({
+    baseURL: useRuntimeConfig().public.usersApiUrl,
+  })
+}
 
 export function getToken() {
   if (typeof localStorage === 'undefined') return null
@@ -58,7 +57,7 @@ function saveSession(user: AuthUser) {
 
 export async function signIn({ email, password }: SignInPayload) {
   try {
-    const response = await authApi.post('/auth/login', { email, password })
+    const response = await authApi().post('/auth/login', { email, password })
     const user = response.data?.data as AuthUser
 
     saveSession(user)
@@ -77,7 +76,7 @@ export async function verifySession() {
   }
 
   try {
-    const response = await authApi.get('/auth/me', {
+    const response = await authApi().get('/auth/me', {
       headers: { Authorization: `Bearer ${token}` },
     })
     const user = response.data?.data as AuthUser

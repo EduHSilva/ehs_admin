@@ -1,13 +1,36 @@
-FROM node:24-alpine
+# syntax=docker/dockerfile:1
+
+# --------------------------------------------------
+# BUILD - Nuxt em modo SPA/estático
+# --------------------------------------------------
+FROM node:24-alpine AS build
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY web/package.json web/package-lock.json ./
+RUN npm ci
 
-RUN npm install
+COPY web/ ./
 
-COPY . .
+# O nginx dos microservices publica este container em /app/admin/.
+# A API é consumida na mesma origem: o nginx encaminha /users para o gateway.
+ARG NUXT_APP_BASE_URL=/app/admin/
+ARG NUXT_PUBLIC_USERS_API_URL=/users
 
-EXPOSE 5173
+ENV NUXT_APP_BASE_URL=$NUXT_APP_BASE_URL
+ENV NUXT_PUBLIC_USERS_API_URL=$NUXT_PUBLIC_USERS_API_URL
 
-CMD ["npm", "run", "dev", "--", "--host"]
+RUN npm run generate
+
+# --------------------------------------------------
+# RUNTIME - nginx estático
+# --------------------------------------------------
+FROM nginx:1.28-alpine AS runtime
+
+COPY docker/nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/.output/public /usr/share/nginx/html/app/admin
+
+EXPOSE 80
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD wget -q -O /dev/null http://127.0.0.1/app/admin/ || exit 1
