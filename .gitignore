@@ -31,3 +31,8 @@ coverage
 
 *.tsbuildinfo
 TODO.md
+
+# Environment files (keep .env.example versioned)
+.env
+.env.*
+!.env.example
