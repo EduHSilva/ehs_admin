@@ -1,37 +1,37 @@
 export const gradientBgBase = 'bg-linear-to-tr'
 export const gradientBgPurplePink = `${gradientBgBase} from-purple-400 via-pink-500 to-red-500`
-export const gradientBgDark = `${gradientBgBase} from-slate-700 via-slate-900 to-slate-800`
+export const gradientBgDark = `${gradientBgBase} from-zinc-700 via-zinc-900 to-zinc-800`
 export const gradientBgPinkRed = `${gradientBgBase} from-pink-400 via-red-500 to-yellow-500`
-export const gradientBgSlateBlue = `${gradientBgBase} from-slate-100 via-slate-50 to-blue-100`
+export const gradientBgSlateBlue = `${gradientBgBase} from-zinc-100 via-zinc-50 to-indigo-100`
 
 export const colorsBgLight = {
   white: 'bg-white text-black',
-  light: 'bg-white text-black dark:bg-slate-900/70 dark:text-white',
-  contrast: 'bg-gray-800 text-white dark:bg-white dark:text-black',
+  light: 'bg-white text-black dark:bg-zinc-900/70 dark:text-white',
+  contrast: 'bg-zinc-800 text-white dark:bg-white dark:text-black',
   success: 'bg-emerald-500 border-emerald-500 text-white',
   danger: 'bg-red-500 border-red-500 text-white',
   warning: 'bg-yellow-500 border-yellow-500 text-white',
-  info: 'bg-blue-500 border-blue-500 text-white',
+  info: 'bg-indigo-500 border-indigo-500 text-white',
 }
 
 export const colorsText = {
-  white: 'text-black dark:text-slate-100',
-  light: 'text-gray-700 dark:text-slate-400',
+  white: 'text-black dark:text-zinc-100',
+  light: 'text-zinc-700 dark:text-zinc-400',
   contrast: 'dark:text-white',
   success: 'text-emerald-500',
   danger: 'text-red-500',
   warning: 'text-yellow-500',
-  info: 'text-blue-500',
+  info: 'text-indigo-500',
 }
 
 export const colorsOutline = {
-  white: [colorsText.white, 'border-gray-100'],
-  light: [colorsText.light, 'border-gray-100'],
-  contrast: [colorsText.contrast, 'border-gray-900 dark:border-slate-100'],
+  white: [colorsText.white, 'border-zinc-100'],
+  light: [colorsText.light, 'border-zinc-100'],
+  contrast: [colorsText.contrast, 'border-zinc-900 dark:border-zinc-100'],
   success: [colorsText.success, 'border-emerald-500'],
   danger: [colorsText.danger, 'border-red-500'],
   warning: [colorsText.warning, 'border-yellow-500'],
-  info: [colorsText.info, 'border-blue-500'],
+  info: [colorsText.info, 'border-indigo-500'],
 }
 
 type ButtonColor = 'white' | 'whiteDark' | 'lightDark' | 'contrast' | 'success' | 'danger' | 'warning' | 'info'
@@ -66,81 +66,81 @@ export const getButtonColor = (
     outlineHover: Record<ButtonColor, string>
   } = {
     ring: {
-      white: 'ring-gray-200 dark:ring-gray-500',
-      whiteDark: 'ring-gray-200 dark:ring-gray-500',
-      lightDark: 'ring-gray-200 dark:ring-gray-500',
-      contrast: 'ring-gray-300 dark:ring-gray-400',
+      white: 'ring-zinc-200 dark:ring-zinc-500',
+      whiteDark: 'ring-zinc-200 dark:ring-zinc-500',
+      lightDark: 'ring-zinc-200 dark:ring-zinc-500',
+      contrast: 'ring-zinc-300 dark:ring-zinc-400',
       success: 'ring-emerald-300 dark:ring-emerald-700',
       danger: 'ring-red-300 dark:ring-red-700',
       warning: 'ring-yellow-300 dark:ring-yellow-700',
-      info: 'ring-blue-300 dark:ring-blue-700',
+      info: 'ring-indigo-300 dark:ring-indigo-700',
     },
     active: {
-      white: 'bg-gray-100',
-      whiteDark: 'bg-gray-100 dark:bg-slate-800',
-      lightDark: 'bg-gray-200 dark:bg-slate-700',
-      contrast: 'bg-gray-700 dark:bg-slate-100',
+      white: 'bg-zinc-100',
+      whiteDark: 'bg-zinc-100 dark:bg-zinc-800',
+      lightDark: 'bg-zinc-200 dark:bg-zinc-700',
+      contrast: 'bg-zinc-700 dark:bg-zinc-100',
       success: 'bg-emerald-700 dark:bg-emerald-600',
       danger: 'bg-red-700 dark:bg-red-600',
       warning: 'bg-yellow-700 dark:bg-yellow-600',
-      info: 'bg-blue-700 dark:bg-blue-600',
+      info: 'bg-indigo-700 dark:bg-indigo-600',
     },
     bg: {
       white: 'bg-white text-black',
-      whiteDark: 'bg-white text-black dark:bg-slate-900 dark:text-white',
-      lightDark: 'bg-gray-100 text-black dark:bg-slate-800 dark:text-white',
-      contrast: 'bg-gray-800 text-white dark:bg-white dark:text-black',
+      whiteDark: 'bg-white text-black dark:bg-zinc-900 dark:text-white',
+      lightDark: 'bg-zinc-100 text-black dark:bg-zinc-800 dark:text-white',
+      contrast: 'bg-zinc-800 text-white dark:bg-white dark:text-black',
       success: 'bg-emerald-600 dark:bg-emerald-500 text-white',
       danger: 'bg-red-600 dark:bg-red-500 text-white',
       warning: 'bg-yellow-600 dark:bg-yellow-500 text-white',
-      info: 'bg-blue-600 dark:bg-blue-500 text-white',
+      info: 'bg-indigo-600 dark:bg-indigo-500 text-white',
     },
     bgHover: {
-      white: 'hover:bg-gray-100',
-      whiteDark: 'hover:bg-gray-100 dark:hover:bg-slate-800',
-      lightDark: 'hover:bg-gray-200 dark:hover:bg-slate-700',
-      contrast: 'hover:bg-gray-700 dark:hover:bg-slate-100',
+      white: 'hover:bg-zinc-100',
+      whiteDark: 'hover:bg-zinc-100 dark:hover:bg-zinc-800',
+      lightDark: 'hover:bg-zinc-200 dark:hover:bg-zinc-700',
+      contrast: 'hover:bg-zinc-700 dark:hover:bg-zinc-100',
       success:
         'hover:bg-emerald-700 hover:border-emerald-700 dark:hover:bg-emerald-600 dark:hover:border-emerald-600',
       danger:
         'hover:bg-red-700 hover:border-red-700 dark:hover:bg-red-600 dark:hover:border-red-600',
       warning:
         'hover:bg-yellow-700 hover:border-yellow-700 dark:hover:bg-yellow-600 dark:hover:border-yellow-600',
-      info: 'hover:bg-blue-700 hover:border-blue-700 dark:hover:bg-blue-600 dark:hover:border-blue-600',
+      info: 'hover:bg-indigo-700 hover:border-indigo-700 dark:hover:bg-indigo-600 dark:hover:border-indigo-600',
     },
     borders: {
       white: 'border-white',
-      whiteDark: 'border-white dark:border-slate-900',
-      lightDark: 'border-gray-100 dark:border-slate-800',
-      contrast: 'border-gray-800 dark:border-white',
+      whiteDark: 'border-white dark:border-zinc-900',
+      lightDark: 'border-zinc-100 dark:border-zinc-800',
+      contrast: 'border-zinc-800 dark:border-white',
       success: 'border-emerald-600 dark:border-emerald-500',
       danger: 'border-red-600 dark:border-red-500',
       warning: 'border-yellow-600 dark:border-yellow-500',
-      info: 'border-blue-600 dark:border-blue-500',
+      info: 'border-indigo-600 dark:border-indigo-500',
     },
     text: {
-      white: 'text-black dark:text-slate-100',
-      whiteDark: 'text-black dark:text-slate-100',
-      lightDark: 'text-gray-700 dark:text-slate-400',
-      contrast: 'dark:text-slate-100',
+      white: 'text-black dark:text-zinc-100',
+      whiteDark: 'text-black dark:text-zinc-100',
+      lightDark: 'text-zinc-700 dark:text-zinc-400',
+      contrast: 'dark:text-zinc-100',
       success: 'text-emerald-600 dark:text-emerald-500',
       danger: 'text-red-600 dark:text-red-500',
       warning: 'text-yellow-600 dark:text-yellow-500',
-      info: 'text-blue-600 dark:text-blue-500',
+      info: 'text-indigo-600 dark:text-indigo-500',
     },
     outlineHover: {
-      white: 'hover:bg-gray-100',
-      whiteDark: 'hover:bg-gray-100 dark:hover:bg-slate-800',
-      lightDark: 'hover:bg-gray-200 dark:hover:bg-slate-700',
+      white: 'hover:bg-zinc-100',
+      whiteDark: 'hover:bg-zinc-100 dark:hover:bg-zinc-800',
+      lightDark: 'hover:bg-zinc-200 dark:hover:bg-zinc-700',
       contrast:
-        'hover:bg-gray-800 hover:text-gray-100 dark:hover:bg-slate-100 dark:hover:text-black',
+        'hover:bg-zinc-800 hover:text-zinc-100 dark:hover:bg-zinc-100 dark:hover:text-black',
       success:
         'hover:bg-emerald-600 hover:text-white hover:text-white dark:hover:text-white dark:hover:border-emerald-600',
       danger:
         'hover:bg-red-600 hover:text-white hover:text-white dark:hover:text-white dark:hover:border-red-600',
       warning:
         'hover:bg-yellow-600 hover:text-white hover:text-white dark:hover:text-white dark:hover:border-yellow-600',
-      info: 'hover:bg-blue-600 hover:text-white dark:hover:text-white dark:hover:border-blue-600',
+      info: 'hover:bg-indigo-600 hover:text-white dark:hover:text-white dark:hover:border-indigo-600',
     },
   }
 

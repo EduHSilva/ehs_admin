@@ -6,6 +6,6 @@
 
 @utility jb-custom-check {
   & input:focus + .jb-check {
-    @apply ring-3 ring-blue-700;
+    @apply ring-3 ring-indigo-700;
   }
 }

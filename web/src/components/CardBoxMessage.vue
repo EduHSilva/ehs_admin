@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <div
-    class="text-gray-500 last:mb-0 dark:text-slate-400"
+    class="text-zinc-500 last:mb-0 dark:text-zinc-400"
     :class="isSmall ? 'mb-3 text-sm' : 'mb-6'"
   >
     <slot />

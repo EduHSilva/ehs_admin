@@ -24,7 +24,7 @@ const isMenuNavBarActive = ref(false)
 
 <template>
   <nav
-    class="fixed inset-x-0 top-0 z-30 h-14 w-screen bg-gray-50 transition-(--transition-position) lg:w-auto dark:bg-slate-800"
+    class="fixed inset-x-0 top-0 z-30 h-14 w-screen bg-zinc-50 transition-(--transition-position) lg:w-auto dark:bg-zinc-800"
   >
     <div class="flex lg:items-stretch" :class="containerMaxW">
       <div class="flex h-14 flex-1 items-stretch">
@@ -36,7 +36,7 @@ const isMenuNavBarActive = ref(false)
         </NavBarItemPlain>
       </div>
       <div
-        class="absolute top-14 left-0 max-h-[calc(100dvh-(--spacing(14)))] w-screen overflow-y-auto bg-gray-50 shadow-lg lg:static lg:flex lg:w-auto lg:overflow-visible lg:shadow-none dark:bg-slate-800"
+        class="absolute top-14 left-0 max-h-[calc(100dvh-(--spacing(14)))] w-screen overflow-y-auto bg-zinc-50 shadow-lg lg:static lg:flex lg:w-auto lg:overflow-visible lg:shadow-none dark:bg-zinc-800"
         :class="[isMenuNavBarActive ? 'block' : 'hidden']"
       >
         <NavBarMenuList :menu="menu" @menu-click="menuClick" />

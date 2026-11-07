@@ -8,6 +8,7 @@ import FormField from '../components/FormField.vue'
 import FormControl from '../components/FormControl.vue'
 import BaseButton from '../components/BaseButton.vue'
 import BaseButtons from '../components/BaseButtons.vue'
+import EhsBrand from '../components/EhsBrand.vue'
 import LayoutGuest from '../layouts/LayoutGuest.vue'
 
 const form = reactive({
@@ -38,21 +39,19 @@ const submit = async () => {
   <LayoutGuest>
     <SectionFullScreen v-slot="{ cardClass }" bg="slateBlue">
       <CardBox
-        :class="[cardClass, 'border border-slate-200/80 dark:border-slate-700']"
+        :class="[cardClass, 'border border-zinc-200/80 dark:border-zinc-700']"
         is-form
         @submit.prevent="submit"
       >
         <div class="mb-8 text-center">
-          <div
-            class="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600 text-lg font-black text-white shadow-lg shadow-blue-600/20"
-          >
-            E
+          <div class="mb-4 flex justify-center">
+            <EhsBrand />
           </div>
-          <h1 class="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">
-            EHS Admin
+          <h1 class="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-white">
+            Acesse o painel
           </h1>
-          <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
-            Acesse o painel de administração
+          <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+            Administração da plataforma EHS Solutions
           </p>
         </div>
 

@@ -1,13 +1,16 @@
 import {
   mdiAccountCircle,
+  mdiEmailOutline,
   mdiMonitor,
   mdiGithub,
-  mdiSquareEditOutline,
-  mdiTable,
-  mdiTelevisionGuide,
   mdiAccountGroupOutline,
-  mdiLogout, mdiServer, mdiSitemap, mdiIntegratedCircuitChip,
+  mdiLogout,
+  mdiServer,
+  mdiSitemap,
 } from '@mdi/js'
+
+const origin = typeof window === 'undefined' ? '' : window.location.origin
+const host = typeof window === 'undefined' ? '' : `${window.location.protocol}//${window.location.hostname}`
 
 export const menuAsideMain = [
   {
@@ -18,26 +21,16 @@ export const menuAsideMain = [
   {
     to: '/clientes',
     label: 'Clientes',
-    icon: mdiAccountGroupOutline
+    icon: mdiAccountGroupOutline,
   },
   {
-    to: '/tables',
-    label: 'Tables',
-    icon: mdiTable,
-  },
-  {
-    to: '/forms',
-    label: 'Forms',
-    icon: mdiSquareEditOutline,
-  },
-  {
-    to: '/ui',
-    label: 'UI',
-    icon: mdiTelevisionGuide,
+    to: '/emails',
+    label: 'E-mails',
+    icon: mdiEmailOutline,
   },
   {
     to: '/profile',
-    label: 'Profile',
+    label: 'Perfil',
     icon: mdiAccountCircle,
   },
   {
@@ -45,29 +38,28 @@ export const menuAsideMain = [
     icon: mdiSitemap,
     menu: [
       {
-        label: 'Finances',
-        href: 'http://localhost:3000',
+        label: 'Estudos',
+        href: `${origin}/app/study/`,
+        target: '_blank',
+      },
+      {
+        label: 'CRM',
+        href: `${origin}/app/crm/`,
+        target: '_blank',
+      },
+      {
+        label: 'Finanças',
+        href: `${origin}/app/finances/`,
         target: '_blank',
       },
       {
         label: 'Fitness',
-        href: 'http://localhost:3001',
-        target: '_blank',
-      },
-    ],
-  },
-  {
-    label: 'Integrações',
-    icon: mdiIntegratedCircuitChip,
-    menu: [
-      {
-        label: 'Spring Admin',
-        href: 'http://localhost/admin',
+        href: `${origin}/app/fitness/`,
         target: '_blank',
       },
       {
-        label: 'Rabbit MQ',
-        href: 'http://localhost:15672/',
+        label: 'Portfólio',
+        href: `${origin}/app/portfolio/`,
         target: '_blank',
       },
     ],
@@ -78,12 +70,12 @@ export const menuAsideMain = [
     menu: [
       {
         label: 'Spring Admin',
-        href: 'http://localhost/admin',
+        href: `${origin}/admin/`,
         target: '_blank',
       },
       {
         label: 'Rabbit MQ',
-        href: 'http://localhost:15672/',
+        href: `${host}:15672/`,
         target: '_blank',
       },
     ],

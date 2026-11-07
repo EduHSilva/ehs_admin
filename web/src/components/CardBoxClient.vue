@@ -67,7 +67,7 @@ const pillText = computed(() => props.text ?? `${props.progress}%`)
           <h4 class="text-xl text-ellipsis">
             {{ name }}
           </h4>
-          <p class="text-gray-500 dark:text-slate-400">{{ date }} @ {{ login }}</p>
+          <p class="text-zinc-500 dark:text-zinc-400">{{ date }} @ {{ login }}</p>
         </div>
       </BaseLevel>
       <PillTag :color="pillType" :label="pillText" :icon="pillIcon" />

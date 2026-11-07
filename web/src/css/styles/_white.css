@@ -1,6 +1,6 @@
 @theme {
-  --scrollbar-track-light: var(--color-gray-100);
-  --scrollbar-thumb-light: var(--color-gray-300);
+  --scrollbar-track-light: var(--color-zinc-100);
+  --scrollbar-thumb-light: var(--color-zinc-300);
   --scrollbar-light: var(--scrollbar-thumb-light) var(--scrollbar-track-light);
 }
 
@@ -13,16 +13,16 @@
       @apply scrollbar-styled-light;
     }
     .aside-menu-item {
-      @apply text-blue-600 hover:text-black;
+      @apply text-indigo-600 hover:text-black;
     }
     .aside-menu-item-active {
       @apply text-black;
     }
     .aside-menu-dropdown {
-      @apply bg-gray-100/75;
+      @apply bg-zinc-100/75;
     }
     .navbar-item-label {
-      @apply text-blue-600;
+      @apply text-indigo-600;
     }
     .navbar-item-label-hover {
       @apply hover:text-black;
@@ -31,7 +31,7 @@
       @apply text-black;
     }
     .overlay {
-      @apply from-white via-gray-100 to-white;
+      @apply from-white via-zinc-100 to-white;
     }
   }
 }

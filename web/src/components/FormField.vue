@@ -41,7 +41,7 @@ const wrapperClass = computed(() => {
     <div
       v-if="help || error"
       class="mt-1 text-xs"
-      :class="error ? 'text-red-600 dark:text-red-500' : 'text-gray-500 dark:text-slate-400'"
+      :class="error ? 'text-red-600 dark:text-red-500' : 'text-zinc-500 dark:text-zinc-400'"
     >
       {{ error ?? help }}
     </div>

@@ -7,30 +7,109 @@ import LayoutAuthenticated from '../layouts/LayoutAuthenticated.vue'
 import CardBox from '../components/CardBox.vue'
 import FormField from '../components/FormField.vue'
 import FormControl from '../components/FormControl.vue'
+import NotificationBar from '../components/NotificationBar.vue'
 import BaseButton from '../components/BaseButton.vue'
 import BaseButtons from '../components/BaseButtons.vue'
 import { clientsStore } from '../stores/clientsStore'
 
 const props = defineProps({ id: { type: [String, Number], required: true } })
 const store = clientsStore()
-if (!store.companies.length) await store.fetchCompanies()
-const company = computed(() => store.companies.find((item) => String(item.id) === String(props.id)))
-const form = reactive({ name: '', createdDate: '', usersCount: 0 })
-const saved = ref(false)
-watch(company, (value) => {
-  if (!value) return
-  Object.assign(form, { name: value.name || '', createdDate: value.createdDate || value.createdAt || '', usersCount: value.usersCount ?? value.userCount ?? 0 })
-}, { immediate: true })
-function submit() { store.updateCompany({ ...company.value, ...form }); saved.value = true }
+if (!store.companies.some((item) => String(item.id) === String(props.id))) {
+  await store.fetchCompany(props.id)
+}
+
+const company = computed(() =>
+  store.companies.find((item) => String(item.id) === String(props.id)),
+)
+const usersCount = computed(() => company.value?.users?.length ?? 0)
+const form = reactive({ name: '' })
+const saving = ref(false)
+const successMessage = ref('')
+const validationError = ref('')
+
+watch(
+  company,
+  (value) => {
+    if (value) form.name = value.name ?? ''
+  },
+  { immediate: true },
+)
+
+function formatDate(value) {
+  if (!value) return '—'
+  const date = new Date(value)
+  return Number.isNaN(date.getTime()) ? String(value) : date.toLocaleString('pt-BR')
+}
+
+async function submit() {
+  validationError.value = ''
+  successMessage.value = ''
+
+  const name = form.name.trim()
+  if (!name) {
+    validationError.value = 'Informe o nome da empresa.'
+    return
+  }
+
+  saving.value = true
+  const saved = await store.saveCompany(props.id, { name })
+  saving.value = false
+
+  if (saved) {
+    form.name = name
+    successMessage.value = 'Alterações salvas com sucesso.'
+  }
+}
 </script>
 
 <template>
   <LayoutAuthenticated><SectionMain>
-    <SectionTitleLineWithButton :icon="mdiDomain" :title="company ? `Empresa: ${company.name}` : 'Empresa'" main><BaseButton to="/clientes" label="Voltar" color="whiteDark" /></SectionTitleLineWithButton>
+    <SectionTitleLineWithButton
+      :icon="mdiDomain"
+      :title="company ? `Empresa: ${company.name}` : 'Empresa'"
+      main
+    >
+      <BaseButton to="/clientes" label="Voltar" color="whiteDark" />
+    </SectionTitleLineWithButton>
     <CardBox v-if="company" is-form @submit.prevent="submit">
-      <p v-if="saved" class="mb-5 rounded bg-green-50 p-3 text-green-700">Alterações salvas localmente.</p>
-      <div class="grid gap-6 lg:grid-cols-2"><FormField label="Nome da empresa"><FormControl v-model="form.name" required /></FormField><FormField label="Data de criação"><FormControl v-model="form.createdDate" type="date" /></FormField><FormField label="Quantidade de usuários"><FormControl v-model="form.usersCount" type="number" /></FormField></div>
-      <template #footer><BaseButtons><BaseButton type="submit" color="info" label="Salvar alterações" /></BaseButtons></template>
+      <NotificationBar v-if="store.error" color="danger" class="mb-5">
+        Não foi possível salvar as alterações. {{ store.error }}
+      </NotificationBar>
+      <NotificationBar v-if="validationError" color="danger" class="mb-5">
+        {{ validationError }}
+      </NotificationBar>
+      <NotificationBar v-if="successMessage" color="success" class="mb-5">
+        {{ successMessage }}
+      </NotificationBar>
+      <div class="grid gap-6 lg:grid-cols-2">
+        <FormField label="Nome da empresa">
+          <FormControl v-model="form.name" required maxlength="150" />
+        </FormField>
+        <FormField label="Data de criação">
+          <div
+            class="flex h-12 items-center rounded-sm border border-zinc-700 bg-zinc-100 px-3 dark:bg-zinc-900"
+          >
+            {{ formatDate(company.createdDate) }}
+          </div>
+        </FormField>
+        <FormField label="Quantidade de usuários">
+          <div
+            class="flex h-12 items-center rounded-sm border border-zinc-700 bg-zinc-100 px-3 dark:bg-zinc-900"
+          >
+            {{ usersCount }}
+          </div>
+        </FormField>
+      </div>
+      <template #footer>
+        <BaseButtons>
+          <BaseButton
+            type="submit"
+            color="info"
+            label="Salvar alterações"
+            :disabled="saving || store.isLoading"
+          />
+        </BaseButtons>
+      </template>
     </CardBox>
     <CardBox v-else><p>Empresa não encontrada.</p></CardBox>
   </SectionMain></LayoutAuthenticated>

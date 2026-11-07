@@ -68,6 +68,30 @@ export async function signIn({ email, password }: SignInPayload) {
   }
 }
 
+export function updateStoredUser(partial: AuthUser) {
+  const current = getUser()
+
+  if (!current) {
+    return
+  }
+
+  localStorage.setItem(USER_STORAGE_KEY, JSON.stringify({ ...current, ...partial, token: undefined }))
+}
+
+export async function logoutAllSessions() {
+  const token = getToken()
+
+  if (!token) {
+    throw new Error('Sessão inválida.')
+  }
+
+  await authApi().post('/auth/logout-all', null, {
+    headers: { Authorization: `Bearer ${token}` },
+  })
+
+  signOut()
+}
+
 export async function verifySession() {
   const token = getToken()
 

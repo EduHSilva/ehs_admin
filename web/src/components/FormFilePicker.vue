@@ -95,7 +95,7 @@ const upload = (event) => {
     </label>
     <div
       v-if="showFilename"
-      class="rounded-r border border-gray-200 bg-gray-100 px-4 py-2 dark:border-slate-700 dark:bg-slate-800"
+      class="rounded-r border border-zinc-200 bg-zinc-100 px-4 py-2 dark:border-zinc-700 dark:bg-zinc-800"
     >
       <span class="line-clamp-1 text-ellipsis">
         {{ file.name }}

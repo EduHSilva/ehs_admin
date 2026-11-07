@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-50 dark:bg-slate-800 dark:text-slate-100">
+  <div class="bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-100">
     <slot />
   </div>
 </template>

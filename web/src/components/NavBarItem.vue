@@ -32,8 +32,8 @@ const is = computed(() => {
 const componentClass = computed(() => {
   const base = [
     isDropdownActive.value
-      ? `navbar-item-label-active dark:text-slate-400`
-      : `navbar-item-label dark:text-white dark:hover:text-slate-400`,
+      ? `navbar-item-label-active dark:text-zinc-400`
+      : `navbar-item-label dark:text-white dark:hover:text-zinc-400`,
     props.item.menu ? 'lg:py-2 lg:px-3' : 'py-2 px-3',
   ]
 
@@ -99,7 +99,7 @@ const darkModeStore = useDarkModeStore()
     <div
       class="flex items-center"
       :class="{
-        'bg-gray-100 p-3 lg:bg-transparent lg:p-0 dark:bg-slate-800 lg:dark:bg-transparent':
+        'bg-zinc-100 p-3 lg:bg-transparent lg:p-0 dark:bg-zinc-800 lg:dark:bg-transparent':
           item.menu,
       }"
     >
@@ -126,7 +126,7 @@ const darkModeStore = useDarkModeStore()
     </div>
     <div
       v-if="item.menu"
-      class="border-b border-gray-100 text-sm lg:absolute lg:top-full lg:left-0 lg:z-20 lg:min-w-full lg:rounded-lg lg:border lg:bg-white lg:shadow-lg dark:border-slate-700 lg:dark:bg-slate-800"
+      class="border-b border-zinc-100 text-sm lg:absolute lg:top-full lg:left-0 lg:z-20 lg:min-w-full lg:rounded-lg lg:border lg:bg-white lg:shadow-lg dark:border-zinc-700 lg:dark:bg-zinc-800"
       :class="{ 'lg:hidden': !isDropdownActive }"
     >
       <NavBarMenuList :menu="item.menu" @menu-click="menuClickDropdown" />

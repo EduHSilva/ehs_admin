@@ -64,20 +64,20 @@ const darkModeStore = useDarkModeStore()
         'rounded-sm': type === 'checkbox',
         'rounded-full': ['radio', 'switch'].includes(type),
         'flex h-6 w-12 shrink-0 items-center p-0.5': type === 'switch',
-        'bg-gray-200': type === 'switch' && !isChecked,
+        'bg-zinc-200': type === 'switch' && !isChecked,
         'border-4 bg-center bg-no-repeat': ['radio', 'checkbox'].includes(type) && isChecked,
         'bg-(image:--checkbox-checked)': type === 'checkbox' && isChecked,
         'bg-(image:--radio-checked)': type === 'radio' && isChecked,
-        'border-blue-600 bg-blue-600': isChecked,
-        'border-gray-700 dark:bg-slate-800': !isChecked,
+        'border-indigo-600 bg-indigo-600': isChecked,
+        'border-zinc-700 dark:bg-zinc-800': !isChecked,
       }"
     >
       <span
         v-if="type === 'switch'"
         class="block h-5 w-5 rounded-full border bg-white"
         :class="{
-          'transform-(--switch-checked) border-blue-600': isChecked,
-          'border-gray-700': !isChecked,
+          'transform-(--switch-checked) border-indigo-600': isChecked,
+          'border-zinc-700': !isChecked,
         }"
       />
     </span>

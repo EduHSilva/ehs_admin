@@ -18,14 +18,14 @@ const buttonClick = (event) => {
 </script>
 
 <template>
-  <header class="flex items-stretch border-b border-gray-100 dark:border-slate-800">
+  <header class="flex items-stretch border-b border-zinc-100 dark:border-zinc-800">
     <div class="flex grow items-center py-3 font-bold" :class="[icon ? 'px-4' : 'px-6']">
       <BaseIcon v-if="icon" :path="icon" class="mr-3" />
       {{ title }}
     </div>
     <button
       v-if="buttonIcon"
-      class="flex items-center justify-center p-2 ring-blue-700 focus:ring-3"
+      class="flex items-center justify-center p-2 ring-indigo-700 focus:ring-3"
       @click="buttonClick"
     >
       <BaseIcon :path="buttonIcon" />

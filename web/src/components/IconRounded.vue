@@ -30,6 +30,6 @@ defineProps({
     :h="h"
     size="24"
     class="rounded-full"
-    :class="bg ? colorsBgLight[color] : [colorsText[color], 'bg-gray-50 dark:bg-slate-800']"
+    :class="bg ? colorsBgLight[color] : [colorsText[color], 'bg-zinc-50 dark:bg-zinc-800']"
   />
 </template>

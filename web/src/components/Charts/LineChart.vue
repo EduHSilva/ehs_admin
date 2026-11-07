@@ -32,10 +32,18 @@ onMounted(() => {
       maintainAspectRatio: false,
       scales: {
         y: {
-          display: false,
+          display: true,
+          beginAtZero: true,
+          ticks: {
+            precision: 0,
+          },
         },
         x: {
           display: true,
+          ticks: {
+            maxTicksLimit: 12,
+            autoSkip: true,
+          },
         },
       },
       plugins: {
