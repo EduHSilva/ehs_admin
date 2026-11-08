@@ -12,7 +12,7 @@ const notificationsApiUrl =
 // Sem isso, links como /app/study/ caem no fallback do Nuxt e viram /app/admin/app/study/.
 const devProxyTarget = process.env.NUXT_DEV_PROXY_TARGET || 'http://localhost'
 const devProxy = Object.fromEntries(
-  ['/app/study', '/app/crm', '/app/finances', '/app/fitness', '/app/portfolio', '/admin'].map(
+  ['/app/study', '/app/budgets', '/app/finances', '/app/fitness', '/app/portfolio', '/admin', '/rabbitmq'].map(
     (path) => [path, { target: devProxyTarget, changeOrigin: true, ws: true }],
   ),
 )

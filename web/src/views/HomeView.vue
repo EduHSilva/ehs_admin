@@ -150,7 +150,7 @@ const recentCompanies = computed(() =>
 
 const shortcuts = [
   { label: 'Estudos', href: `${origin}/app/study/`, icon: mdiBookOpenPageVariantOutline, color: 'text-violet-500' },
-  { label: 'CRM', href: `${origin}/app/crm/`, icon: mdiBriefcaseOutline, color: 'text-indigo-500' },
+  { label: 'Orçamentos', href: `${origin}/app/budgets/`, icon: mdiBriefcaseOutline, color: 'text-indigo-500' },
   { label: 'Finanças', href: `${origin}/app/finances/`, icon: mdiCashMultiple, color: 'text-emerald-500' },
   { label: 'Fitness', href: `${origin}/app/fitness/`, icon: mdiDumbbell, color: 'text-orange-500' },
   { label: 'Portfólio', href: `${origin}/app/portfolio/`, icon: mdiSitemap, color: 'text-pink-500' },

@@ -10,7 +10,6 @@ import {
 } from '@mdi/js'
 
 const origin = typeof window === 'undefined' ? '' : window.location.origin
-const host = typeof window === 'undefined' ? '' : `${window.location.protocol}//${window.location.hostname}`
 
 export const menuAsideMain = [
   {
@@ -43,8 +42,8 @@ export const menuAsideMain = [
         target: '_blank',
       },
       {
-        label: 'CRM',
-        href: `${origin}/app/crm/`,
+        label: 'Orçamentos',
+        href: `${origin}/app/budgets/`,
         target: '_blank',
       },
       {
@@ -75,7 +74,7 @@ export const menuAsideMain = [
       },
       {
         label: 'Rabbit MQ',
-        href: `${host}:15672/`,
+        href: `${origin}/rabbitmq/`,
         target: '_blank',
       },
     ],

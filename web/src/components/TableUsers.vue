@@ -9,7 +9,7 @@ import { clientsStore } from '../stores/clientsStore'
 
 const ROLE_OPTIONS = [
   'ADMIN',
-  'CRM',
+  'BUDGETS',
   'FINANCES',
   'HEALTH_USER',
   'HEALTH_PERSONAL',
