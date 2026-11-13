@@ -73,6 +73,7 @@ jobs:
             NUXT_APP_BASE_URL=/app/admin/
             NUXT_PUBLIC_USERS_API_URL=/users
             NUXT_PUBLIC_NOTIFICATIONS_API_URL=/notifications
+            NUXT_PUBLIC_GOOGLE_CLIENT_ID=${{ vars.ADMIN_GOOGLE_CLIENT_ID }}
           tags: |
             ${{ env.IMAGE_PREFIX }}/${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_PREFIX }}/${{ env.IMAGE_NAME }}:${{ github.sha }}

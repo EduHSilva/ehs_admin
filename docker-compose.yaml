@@ -25,6 +25,8 @@ services:
         # "/users" = mesma origem através do nginx dos microservices.
         NUXT_PUBLIC_USERS_API_URL: ${ADMIN_USERS_API_URL:-/users}
         NUXT_PUBLIC_NOTIFICATIONS_API_URL: ${ADMIN_NOTIFICATIONS_API_URL:-/notifications}
+        # Mesmo client ID OAuth usado pelo backend (GOOGLE_CLIENT_ID).
+        NUXT_PUBLIC_GOOGLE_CLIENT_ID: ${ADMIN_GOOGLE_CLIENT_ID:-}
     image: ${ADMIN_UI_IMAGE:-ehs_admin-ui:local}
     container_name: admin-ui
     restart: unless-stopped

@@ -26,6 +26,7 @@ docker compose up -d --build
 
 - O compose local usa a rede externa `ehs_microservices_default` e publica a porta 3000 para depuraÃ§Ã£o.
 - A API Ã© consumida na mesma origem (`NUXT_PUBLIC_USERS_API_URL=/users`), pelo gateway dos microservices.
+- Login Google: o `NUXT_PUBLIC_GOOGLE_CLIENT_ID` Ã© compilado no bundle estÃ¡tico, entÃ£o precisa existir no build (local: `ADMIN_GOOGLE_CLIENT_ID=... docker compose build`; CI: var de repositÃ³rio `ADMIN_GOOGLE_CLIENT_ID`). Vazio = botÃ£o oculto.
 - A imagem publicada pelo GitHub Actions Ã© `ghcr.io/eduhsilva/admin-ui` (tags `latest` e `<sha>`), gerada por `.github/workflows/build.yml`.
 - Em produÃ§Ã£o, use `docker-compose.prod.yml`. Ele nÃ£o publica portas no host e usa por padrÃ£o a rede `microservices_backend`:
   `docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d`.
