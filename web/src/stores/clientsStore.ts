@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import axios from 'axios'
+import { createApi } from '../services/http'
 import { getToken } from '../services/auth'
 
 type RecordItem = {
@@ -86,17 +86,17 @@ export const clientsStore = defineStore('clientsStore', () => {
   const lastUsersQuery = ref<ListQuery>({})
   const lastCompaniesQuery = ref<ListQuery>({})
 
-  const usersApi = () =>
-    axios.create({
-      baseURL: useRuntimeConfig().public.usersApiUrl,
-      headers: { Authorization: `Bearer ${getToken()}` },
-    })
+  const usersApi = () => {
+    const api = createApi(useRuntimeConfig().public.usersApiUrl)
+    api.defaults.headers.common.Authorization = `Bearer ${getToken()}`
+    return api
+  }
 
-  const notificationsApi = () =>
-    axios.create({
-      baseURL: useRuntimeConfig().public.notificationsApiUrl,
-      headers: { Authorization: `Bearer ${getToken()}` },
-    })
+  const notificationsApi = () => {
+    const api = createApi(useRuntimeConfig().public.notificationsApiUrl)
+    api.defaults.headers.common.Authorization = `Bearer ${getToken()}`
+    return api
+  }
 
   async function fetchUsers(query: ListQuery = {}) {
     error.value = ''

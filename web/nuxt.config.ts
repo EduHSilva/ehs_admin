@@ -36,6 +36,6 @@ export default defineNuxtConfig({
   imports: { dirs: ['src/stores', 'src/services'] },
   alias: { '@': './src' },
   runtimeConfig: {
-    public: { usersApiUrl, notificationsApiUrl },
+    public: { usersApiUrl, notificationsApiUrl, googleClientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID },
   },
 })

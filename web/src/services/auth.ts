@@ -1,7 +1,5 @@
-import axios from 'axios'
-
-const TOKEN_STORAGE_KEY = 'ehs-admin-token'
-const USER_STORAGE_KEY = 'ehs-admin-user'
+import { createApi } from './http'
+import { clearSession, TOKEN_STORAGE_KEY, USER_STORAGE_KEY } from './session'
 
 type AuthUser = {
   token?: string
@@ -16,9 +14,7 @@ type SignInPayload = {
 }
 
 function authApi() {
-  return axios.create({
-    baseURL: useRuntimeConfig().public.usersApiUrl,
-  })
+  return createApi(useRuntimeConfig().public.usersApiUrl)
 }
 
 export function getToken() {
@@ -57,7 +53,20 @@ function saveSession(user: AuthUser) {
 
 export async function signIn({ email, password }: SignInPayload) {
   try {
-    const response = await authApi().post('/auth/login', { email, password })
+    const response = await authApi().post('/auth/login', { email, password, app: 'ADMIN' })
+    const user = response.data?.data as AuthUser
+
+    saveSession(user)
+    return user
+  } catch (error) {
+    signOut()
+    throw error
+  }
+}
+
+export async function signInWithGoogle(idToken: string) {
+  try {
+    const response = await authApi().post('/auth/login', { tokenGmail: idToken, app: 'ADMIN' })
     const user = response.data?.data as AuthUser
 
     saveSession(user)
@@ -118,7 +127,5 @@ export async function verifySession() {
 }
 
 export function signOut() {
-  if (typeof localStorage === 'undefined') return
-  localStorage.removeItem(TOKEN_STORAGE_KEY)
-  localStorage.removeItem(USER_STORAGE_KEY)
+  clearSession()
 }

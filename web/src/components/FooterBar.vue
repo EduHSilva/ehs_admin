@@ -11,6 +11,7 @@ const year = new Date().getFullYear()
     <BaseLevel>
       <div class="flex flex-col items-center justify-center gap-6 lg:flex-row lg:justify-start">
         <b>&copy;{{ year }}, EHS Solutions</b>
+        <a href="/app/privacidade/" class="text-blue-600 hover:underline dark:text-blue-400">Política de Privacidade</a>
         <slot />
       </div>
       <div class="md:py-2">
