@@ -1,13 +1,13 @@
 <script setup>
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import { signIn, signInWithGoogle } from '../services/auth'
+import { useDarkModeStore } from '../stores/darkMode'
 import { mdiAccount, mdiAsterisk } from '@mdi/js'
 import SectionFullScreen from '../components/SectionFullScreen.vue'
 import CardBox from '../components/CardBox.vue'
 import FormField from '../components/FormField.vue'
 import FormControl from '../components/FormControl.vue'
 import BaseButton from '../components/BaseButton.vue'
-import BaseButtons from '../components/BaseButtons.vue'
 import EhsBrand from '../components/EhsBrand.vue'
 import LayoutGuest from '../layouts/LayoutGuest.vue'
 
@@ -18,6 +18,7 @@ const form = reactive({
 
 const router = useRouter()
 const config = useRuntimeConfig()
+const darkMode = useDarkModeStore()
 const errorMessage = ref('')
 const isSubmitting = ref(false)
 
@@ -25,7 +26,36 @@ const googleSlot = ref(null)
 const googleEnabled = computed(() => Boolean(config.public.googleClientId))
 const googleFailed = ref(false)
 
-function loadGoogleIdentity() {
+let googleRenderId = null
+let googleRenderedWidth = 0
+let googleRenderedTheme = ''
+let googleResizeObserver = null
+
+function renderGoogleButton() {
+  const slot = googleSlot.value
+  if (!slot || !googleRenderId) return
+
+  // O GSI não aceita largura percentual nem troca de tema sem novo render:
+  // medida e tema precisam ser passados a cada redesenho.
+  const width = Math.max(200, Math.min(400, Math.floor(slot.getBoundingClientRect().width) || 320))
+  const theme = darkMode.isEnabled ? 'filled_black' : 'outline'
+  if (width === googleRenderedWidth && theme === googleRenderedTheme) return
+  googleRenderedWidth = width
+  googleRenderedTheme = theme
+  slot.replaceChildren()
+
+  googleRenderId.renderButton(slot, {
+    type: 'standard',
+    theme,
+    size: 'large',
+    text: 'continue_with',
+    shape: 'rectangular',
+    logo_alignment: 'left',
+    width,
+  })
+}
+
+async function loadGoogleIdentity() {
   if (window.google?.accounts?.id) return Promise.resolve(window.google)
   return new Promise((resolve, reject) => {
     const script = document.createElement('script')
@@ -63,18 +93,21 @@ onMounted(async () => {
         if (response.credential) void signInGoogle(response.credential)
       },
     })
-    google.accounts.id.renderButton(googleSlot.value, {
-      type: 'standard',
-      theme: 'outline',
-      size: 'large',
-      text: 'continue_with',
-      shape: 'rectangular',
-      logo_alignment: 'left',
-      width: 320,
-    })
+    googleRenderId = google.accounts.id
+    renderGoogleButton()
+    googleResizeObserver = new ResizeObserver(renderGoogleButton)
+    googleResizeObserver.observe(googleSlot.value)
   } catch {
     googleFailed.value = true
   }
+})
+
+// O tema é aplicado pelo store depois da montagem (app.vue), então o botão
+// precisa ser redesenhado quando ele muda.
+watch(() => darkMode.isEnabled, renderGoogleButton)
+
+onBeforeUnmount(() => {
+  googleResizeObserver?.disconnect()
 })
 
 const submit = async () => {
@@ -96,7 +129,7 @@ const submit = async () => {
   <LayoutGuest>
     <SectionFullScreen v-slot="{ cardClass }" bg="slateBlue">
       <CardBox
-        :class="[cardClass, 'border border-zinc-200/80 dark:border-zinc-700']"
+        :class="[cardClass, 'max-w-md border border-zinc-200/80 dark:border-zinc-700']"
         is-form
         @submit.prevent="submit"
       >
@@ -146,21 +179,20 @@ const submit = async () => {
 
         <template #footer>
           <div class="space-y-4">
-            <BaseButtons>
-              <BaseButton
-                type="submit"
-                color="info"
-                :label="isSubmitting ? 'Entrando...' : 'Entrar'"
-                :disabled="isSubmitting"
-              />
-            </BaseButtons>
+            <BaseButton
+              type="submit"
+              color="info"
+              class="w-full"
+              :label="isSubmitting ? 'Entrando...' : 'Entrar'"
+              :disabled="isSubmitting"
+            />
             <template v-if="googleEnabled">
               <div v-if="!googleFailed" class="flex items-center gap-3 text-xs font-semibold uppercase tracking-wide text-zinc-400">
                 <span class="h-px flex-1 bg-zinc-200 dark:bg-zinc-700" />
                 <span>ou</span>
                 <span class="h-px flex-1 bg-zinc-200 dark:bg-zinc-700" />
               </div>
-              <div v-if="!googleFailed" ref="googleSlot" class="flex min-h-11 justify-center" />
+              <div v-if="!googleFailed" ref="googleSlot" class="flex min-h-11 w-full justify-center" />
               <p v-else class="text-center text-sm text-zinc-500 dark:text-zinc-400">
                 Não foi possível carregar o login com Google.
               </p>
